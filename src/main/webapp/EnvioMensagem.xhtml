@@ -8,10 +8,22 @@
 <h:head></h:head> 
 <body> 
 
-	<h:form>
+	<h:form prependId="false">
 		<p:inputText value="#{envioMensagem.texto}"/>
 		<p:commandButton value="Enviar Mensagem" 
 			action="#{envioMensagem.enviarMensagem}"/>
+			
+		<p:inputText id="idUsuario" value="#{envioMensagem.usuario.nome}"/>
+		
+		<p:commandButton value="salvar usuario" 
+				action="#{envioMensagem.salvar()}"
+				process="@this idUsuario" update="tblUsuario"/>
+			
+		<p:dataTable id="tblUsuario" var="usuario" value="#{envioMensagem.listaNomes}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{usuario.nome}" />
+			</p:column>
+		</p:dataTable>	
 	</h:form>
 
 </body> 
